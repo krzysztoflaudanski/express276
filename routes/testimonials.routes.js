@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('../db'); // Zaimportuj dane z odpowiedniego pliku lub ścieżki
 const { generateRandomId } = require('./../utils/helpers');
 
+
 const router = express.Router();
 
 router.get('/', (req, res) => {
