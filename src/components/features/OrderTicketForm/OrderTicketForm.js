@@ -48,7 +48,6 @@ const OrderTicketForm = () => {
         });
         setIsError(false);
       } catch (error) {
-        // Obsłuż błąd, jeśli wystąpi
         setIsError(true);
       }
     } else {
