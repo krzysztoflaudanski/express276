@@ -1,6 +1,6 @@
 const express = require('express');
 const db = require('../db');
-const { generateRandomId } = require('../src/utils/helpers');
+const { generateRandomId } = require('./../utils/helpers');
 
 const router = express.Router();
 
