@@ -19,15 +19,21 @@ router.get('/:id', (req, res) => {
     }
 });
 
-// Dla POST /seats
 router.post('/', (req, res) => {
     const { day, seat, client, email } = req.body;
 
     if (day && seat && client && email) {
-        const newId = generateRandomId();
-        const newSeat = { id: newId, day, seat, client, email };
-        db.seats.push(newSeat);
-        res.status(201).json({ message: 'OK' });
+        // Sprawdź, czy miejsce w dniu jest już zajęte
+        const isSeatTaken = db.seats.some(existingSeat => existingSeat.day === day && existingSeat.seat === seat);
+
+        if (isSeatTaken) {
+            res.status(409).json({ error: 'Seat is already taken' });
+        } else {
+            const newId = generateRandomId();
+            const newSeat = { id: newId, day, seat, client, email };
+            db.seats.push(newSeat);
+            res.status(201).json({ message: 'OK' });
+        }
     } else {
         res.status(400).json({ error: 'Invalid data format' });
     }
